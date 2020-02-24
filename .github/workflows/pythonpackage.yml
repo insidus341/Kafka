@@ -31,8 +31,9 @@ jobs:
       run: |
         pip install pytest
         pytest tests/
-    - name: Upload Artifact
+    - name: Create Artifact Directory
       run: mkdir -p artifacts/
+    - name: Upload Artifact
       uses: actions/upload-artifact@v1
       with:
         name: test-artifact
