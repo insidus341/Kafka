@@ -13,7 +13,7 @@ def run():
     response = requests.get(
         "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=CSCO&interval=5min&apikey=PR1WOTAE73NO13KD")
 
-    if response.status_code is 200:
+    if response.status_code == 200:
          data = response.json()
          timestamp = datetime.datetime.now().timestamp()
 
