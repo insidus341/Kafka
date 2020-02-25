@@ -9,7 +9,7 @@ import os
 def run():
 
     try:
-        response = get_api_request(os.environ['stock_api_key'])
+        response = get_api_request(os.environ['STOCK_API_KEY'])
         response_with_timestamp = add_timestamp_to_response(response)
     except:
         # we don't need to anything if this fails

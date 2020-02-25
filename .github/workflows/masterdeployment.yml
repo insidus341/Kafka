@@ -27,5 +27,3 @@ jobs:
           TARGET: ${{ secrets.REMOTE_TARGET }}
           ARGS: "-rltgoDzvO"
           SOURCE: "run/"
-          
-          

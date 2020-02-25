@@ -2,7 +2,7 @@ from run import get_cisco_stock_price
 import os
 
 def test_get_api_request():
-    out = get_cisco_stock_price.get_api_request(os.environ['stock_api_key'])
+    out = get_cisco_stock_price.get_api_request(os.environ['STOCK_API_KEY'])
     assert out is not False
 
 
