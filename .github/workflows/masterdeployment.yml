@@ -26,4 +26,4 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           ARGS: "-rltgoDzvO"
           SOURCE: "dist/"
-          TARGET: /home/kafka/
+          TARGET: /home/github/
