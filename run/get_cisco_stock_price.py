@@ -2,11 +2,13 @@ from json import dumps
 import requests
 import datetime
 
+import os
+
 
 def run():
 
     try:
-        response = get_api_request()
+        response = get_api_request(os.environ['stock_api_key'])
         response_with_timestamp = add_timestamp_to_response(response)
     except:
         return False
@@ -14,9 +16,9 @@ def run():
     send_to_kafka(response_with_timestamp)
 
 
-def get_api_request():
+def get_api_request(api_key):
     response = requests.get(
-        "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=CSCO&interval=5min&apikey=PR1WOTAE73NO13KD")
+        "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=CSCO&interval=5min&apikey=" + api_key)
 
     if response.status_code == 200:
         return response.json()
