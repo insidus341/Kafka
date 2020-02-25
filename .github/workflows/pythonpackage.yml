@@ -1,14 +1,17 @@
-name: Python package test
+name: Test on development
 
-on: [push]
+on:
+  push:
+    branches:
+      - development
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: [ubuntu-latest, windows-latest]
     strategy:
       matrix:
-        python-version: [3.8]
+        python-version: [3.7, 3.8]
 
     steps:
     - uses: actions/checkout@v2
