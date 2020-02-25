@@ -1,10 +1,36 @@
-name: Python package test
+name: Deploy on Master
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
+
+    jobs:
+      deploy:
+        name: Deploy
+        runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v1
+
+        - name: Deploy to staging server
+          uses: easingthemes/ssh-deploy@v2.0.7
+          env:
+            SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            REMOTE_HOST: ${{ secrets.SSH_REMOTE_HOST }}
+            REMOTE_USER: ${{ secrets.SSH_REMOTE_USER }}
+            TARGET: ${{ secrets.REMOTE_TARGET }}
+
+
+
+
+
+
+
+
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -40,5 +66,3 @@ jobs:
       with:
         name: test-artifact
         path: artifacts/
-
-
