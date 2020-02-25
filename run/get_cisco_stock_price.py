@@ -11,12 +11,13 @@ def run():
     try:
         response = get_api_request(os.environ['STOCK_API_KEY'])
         response_with_timestamp = add_timestamp_to_response(response)
+        response_with_otherdata = add_otherdata_to_response(response_with_timestamp)
     except:
         # we don't need to anything if this fails
         return False
 
     # send this data to our kafka topic
-    send_to_kafka(response_with_timestamp)
+    send_to_kafka(response_with_otherdata)
 
 
 def get_api_request(api_key):
@@ -34,6 +35,12 @@ def add_timestamp_to_response(data):
     # this data does not include a timestamp, let's add one
     timestamp = datetime.datetime.now().timestamp()
     data["timestamp"] = timestamp
+
+    return data
+
+
+def add_otherdata_to_response(data):
+    data["otherdata"] = "hello this is a test"
 
     return data
 
