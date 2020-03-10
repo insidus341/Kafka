@@ -1,9 +1,10 @@
-name: Test on development
+name: Unit tests
 
 on:
   push:
     branches:
       - development
+      - webhook_server
 
 jobs:
   build:
@@ -44,5 +45,3 @@ jobs:
       with:
         name: test-artifact
         path: artifacts/
-
-
