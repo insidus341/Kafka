@@ -1,12 +1,12 @@
 from flask import Flask, request
 from OpenSSL import SSL
-
 from json import dumps
-
 import os
 
 # Create a handler for Flask
 app = Flask(__name__)
+
+# Envrionmentals
 # SSL_CERT = os.environ['SSL_CERT']
 # SSL_KEY = os.environ['SSL_KEY']
 # HOST = os.environ['WEBHOOK_HOST']

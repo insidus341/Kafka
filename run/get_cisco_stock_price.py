@@ -1,24 +1,26 @@
 from json import dumps
 import requests
 import datetime
-
-# environmental variables are added in github
 import os
 
-class API_Get_Stock():
+# environmental variables are added in github
+STOCK_API_KEY = os.environ['STOCK_API_KEY']
+
+
+class APIGetStock:
 
     def get_stock_price(self):
 
         try:
-            response = self.get_api_request(os.environ['STOCK_API_KEY'])
-            response_with_timestamp = self.add_timestamp_to_response(response)
-            response_with_otherdata = self.add_otherdata_to_response(response_with_timestamp)
-        except:
+            response = self._get_api_request(STOCK_API_KEY)
+            response_with_timestamp = self._add_timestamp_to_response(response)
+            response_with_otherdata = self._add_otherdata_to_response(response_with_timestamp)
+        except Exception as e:
             # we don't need to anything if this fails
             return False
 
         # send this data to our kafka topic
-        self.send_to_kafka(response_with_otherdata)
+        self._send_to_kafka(response_with_otherdata)
 
     def _get_api_request(self, api_key):
         response = requests.get(
@@ -60,5 +62,5 @@ if __name__ == "__main__":
                              dumps(x).encode('utf-8'))
 
     # lets go
-    kafka_api_cisco_stock = API_Get_Stock()
-    API_Get_Stock.run()
+    kafka_api_cisco_stock = APIGetStock()
+    APIGetStock.get_stock_price()
